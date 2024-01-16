@@ -1,63 +1,19 @@
+#include <stdlib.h> 
 #include "main.h"
-#include <stdlib.h>
-
 /**
-* create_array - creates an array of chars,
-* and initializes it with a specific char.
-* @size: the size of the array
-* @c: initial value
-*
-* Return: a pointer to the array, or NULL if it fails
-*/
-char *create_array(unsigned int size, char c)
+ * malloc_checked - allocates memory using malloc
+ * @b: number of bytes to allocates
+ *
+ * Return: a pointer to the allocated memory.
+ * if malloc fails, status value is equal to 98.
+ */
+void *malloc_checked(unsigned int b)
 {
-  char *array;
-  unsigned int i;
+	char *p;
 
-  if (size == 0)
-     return (NULL);
-
-  array = (char *)malloc(sizeof(char) * size);
-  if (array == NULL)
-     return (NULL);
-
-  for (i = 0; i < size; i++)
-     array[i] = c;
-
-  return (array);
+	p = malloc(b);
+	if (p == NULL)
+		exit(98);
+	return (p);
 }
 
-========= 1-strdup.c ==============
-
-#include "main.h"
-#include <stdlib.h>
-
-/**
-* _strdup - returns a pointer to a newly allocated space in memory,
-* which contains a copy of the string given as a parameter.
-* @str: the source string
-*
-* Return: returns a pointer to the duplicated string.
-* It returns NULL if insufficient memory was available
-*/
-char *_strdup(char *str)
-{
-  char *copy;
-  int i, len = 0;
-
-  if (str == NULL)
-     return (NULL);
-
-  while (str[len] != '\0')
-     len++;
-
-  copy = (char *)malloc((sizeof(char) * len) + 1);
-  if (copy == NULL)
-     return (NULL);
-
-  for (i = 0; i < len; i++)
-     copy[i] = str[i];
-  copy[len] = '\0';
-
-  return (copy);
-}
